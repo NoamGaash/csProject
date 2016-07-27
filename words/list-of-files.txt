@@ -1,0 +1,11 @@
+big.txt מילת-חיזוק\הגדלה\העצמה
+callToAction.txt מילת-קריאה-לפעולה
+happy-smiles.txt סמיילי-שמח-(:
+happy.txt מילה-חיובית-(:
+negative.txt מילה-שלילית-):
+sad-smiles.txt סמיילי-עצוב-):
+safewords.txt מילה-שמשדרת-אמינות
+slang.txt סלנג
+name.txt שמות
+pronoun.txt כינויי-גוף
+else.txt אחר

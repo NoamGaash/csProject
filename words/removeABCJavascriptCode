@@ -1,0 +1,4 @@
+arr = document.getElementById("codewindow").value.split("\n")
+arr2 = [];
+for(i in arr) if (arr[i].length > 1) arr2.push(arr[i])
+document.getElementById("codewindow").value = arr2.join("\n")

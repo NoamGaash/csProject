@@ -1,0 +1,6 @@
+[18-Jul-2016 18:56:20 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/noamgaas/public_html/cs/project/getVector/metadata.php on line 51
+[18-Jul-2016 19:11:33 UTC] PHP Parse error:  syntax error, unexpected 'freq' (T_STRING) in /home/noamgaas/public_html/cs/project/getVector/metadata.php on line 60
+[18-Jul-2016 19:29:33 UTC] PHP Parse error:  syntax error, unexpected '2' (T_LNUMBER) in /home/noamgaas/public_html/cs/project/getVector/metadata.php on line 69
+[18-Jul-2016 19:29:46 UTC] PHP Parse error:  syntax error, unexpected '2' (T_LNUMBER) in /home/noamgaas/public_html/cs/project/getVector/metadata.php on line 69
+[18-Jul-2016 19:29:48 UTC] PHP Parse error:  syntax error, unexpected '2' (T_LNUMBER) in /home/noamgaas/public_html/cs/project/getVector/metadata.php on line 69
+[18-Jul-2016 19:42:26 UTC] PHP Fatal error:  Cannot redeclare varianceFreq() (previously declared in /home/noamgaas/public_html/cs/project/getVector/metadata.php:74) in /home/noamgaas/public_html/cs/project/getVector/metadata.php on line 88

@@ -1,0 +1,128 @@
+<?php
+
+function getMetadata($post){
+	//print_r($post);
+	$ans = [
+		// post length:
+		strlen($post['message']),
+		
+		// page name length:
+		strlen($post['name']),
+		
+		// count url's, numbers, and email addresses
+		countURL($post['message']),
+		countNumbers($post['message']),
+		countEmail($post['message']),
+		
+		// timestamp representing the time in the day when the post was published:
+		strtotime($post['created_time']) %(24*60*60), 
+		
+		// timestamp representing the date and time when the post was published:
+		strtotime($post['created_time']),
+		
+		// page likes:
+		intval($post['likes']),
+		
+		count_punctuations($post['likes']),
+		
+		//countDiffrentsWords($post['message']),
+		
+		//str_word_count($post['message']),
+		
+		//avaregeFreq($post['message']),
+		
+		//medianFreq($post['message']),
+		
+		//varianceFreq($post['message']),
+		
+		//std($post['message']),
+	];
+	
+	// hashtags, taggings, words & lines count
+	foreach (["#", "@", " ","\n"] as $sign)
+		array_push($ans, substr_count($post['message'], $sign));
+	
+	return $ans;
+}
+function countDiffrentsWords($msg){
+	$arr=preg_split("/[\s,]+/",$msg);
+	$arr=array_unique($arr);
+	return count($arr);
+}
+function freq($msg){
+	$counter=1;
+	$freq=[];
+	$arr=preg_split("/[\s,]+/",$msg);
+	sort($arr);
+	for($i=0; $i<count($arr); $i++){
+		if($arr[$i]==$arr[$i+1])
+			$counter++;
+		if($arr[$i]!=$arr[$i+1]){
+			array_push($freq, $counter);	
+			$counter=1;
+		}
+	}
+	return $freq;
+}
+
+function avaregeFreq($msg){
+	$arr=freq($msg);
+	return array_sum($arr) / count($arr);
+}
+
+function medianFreq($msg){
+	$array=freq($msg);
+	sort($array); 
+        $middle = round(count($array) /2); 
+        $total = $array[$middle-1];
+        return $total; 
+}
+
+function varianceFreq($msg){
+	$array=freq($msg);
+	return variance($array);
+}
+
+function variance($aValues, $bSample = false){
+	$fMean = array_sum($aValues) / count($aValues);
+	$fVariance = 0.0;
+	foreach ($aValues as $i)
+	{
+		$fVariance += pow($i - $fMean, 2);
+	}
+	$fVariance /= ( $bSample ? count($aValues) - 1 : count($aValues) );
+	return $fVariance;
+}
+
+function std($msg){
+	return sqrt(varianceFreq($msg));
+}
+
+function countURL($msg){
+	if(isset($msg) && $msg)
+		 return countRegex($msg,
+		 	'#([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?#'
+		 );
+	else return 0;
+}
+
+function countNumbers($msg){
+	if(isset($msg) && $msg)
+		return countRegex($msg, '#[0-9]+#');
+	else return 0;
+}
+
+function countEmail($msg){
+	if(isset($msg) && $msg)
+		return countRegex($msg, '#^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$#');
+	else return 0;
+}
+
+function countRegex($msg, $reg){
+	return preg_match_all($reg, $msg);
+}
+
+
+function count_punctuations($s) {
+  	return preg_match_all('/[[:punct:]]/', $s);
+}
