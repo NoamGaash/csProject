@@ -32,7 +32,7 @@ foreach ($filenames as $filename){
 	$words[$filename] = array_unique($words[$filename]);
 }
 
-echo count($words, 1);
+//echo count($words, 1);
 
 function getWordsStats($post){
 	global $filenames, $words;
