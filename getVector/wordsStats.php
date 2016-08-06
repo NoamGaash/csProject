@@ -12,6 +12,7 @@ foreach ($filenames as $filename){
 	$wordsCount = count($words[$filename]);
 	
 	for($i=0; $i<$wordsCount; $i++){
+
 		$words[$filename][$i] = explode(
 			" ",
 			trim(
@@ -22,9 +23,16 @@ foreach ($filenames as $filename){
 				)
 			)
 		)[0];
+		
+		if(strlen($words[$filename][$i]) < 2){
+			unset($words[$filename][$i]);
+		}
+		
 	}
 	$words[$filename] = array_unique($words[$filename]);
 }
+
+echo count($words, 1);
 
 function getWordsStats($post){
 	global $filenames, $words;
@@ -34,8 +42,7 @@ function getWordsStats($post){
 		$count = 0;
 		
 		foreach ($words[$filename] as $word){
-			if(strlen($word) > 1)
-				$count+=substr_count($post['message'], $word);
+			$count+=substr_count($post['message'], $word);
 		}
 		array_push($ans, $count);
 	}
